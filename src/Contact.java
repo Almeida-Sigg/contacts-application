@@ -1,3 +1,5 @@
+import java.sql.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -31,16 +33,25 @@ public class Contact {
         return new Contact(name,phoneNumber);
     }
 
+    ArrayList<String> contactList = new ArrayList<String>();
 
+    public ArrayList<String> getContactList() {
+        return contactList;
+    }
 
+    public void addContacts(String names){
+        contactList.add(names);
+    }
 
+    public void displayContactList() {
+        System.out.println("Here is your list of contacts: ");
+        for(int i = 0; i < contactList.size(); i++){
+            System.out.println(i + " - " + contactList.get(i));
+        }
+
+    }
 
     public static void main(String[] args) {
-
-        createContact("billybob","756743");
-
-        System.out.println();
-
 
     }
 

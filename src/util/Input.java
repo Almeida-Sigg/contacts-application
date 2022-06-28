@@ -2,69 +2,96 @@ package util;
 
 import java.util.Scanner;
 
-public class Input{
-    private static Scanner scanner = new Scanner(System.in);
-    public Input(){}
+public class Input {
+    private final Scanner scanner = new Scanner(System.in);
 
-    public boolean yesNo() {
-        System.out.println("say yes or no ");
-        String answer = scanner.nextLine();
-
-        if(answer.equals("y") || answer.equals("yes")) {
-            return true;
-        }else
-            return false;
+    public String getString(){
+//        System.out.println("Please enter a string: ");
+        return scanner.nextLine();
     }
 
-//    public int getInt() {
-//        System.out.println("Gimme a number.\n");
-//        int answer = Integer.parseInt(getString());
-//
-//        if (answer == Integer.valueOf(answer)) {
-//            answer == scanner.nextInt();
-//        }
-//        return 0;
-//    }
-
-    int getInt(int min, int max) throws Exception{
-        System.out.format("Gimme a number between %d and %d\n",min,max );
-        int answer = Integer.valueOf(getString());
-
-        try{
-            if (answer < min || answer > max) {
-                throw new Exception("read the curriculum");
-            }
-            System.out.println(answer);
-        } catch (NumberFormatException e) {
-            System.out.println("Nah playa, i said gimme a numba");
-            getInt(min, max);
+    public boolean yesNo(){
+        System.out.println("Enter yes or no: (Y/N)");
+        String resp = scanner.nextLine();
+        boolean decision = false;
+        if (resp.equalsIgnoreCase("y")){
+            decision = true;
         }
-        return answer;
+        System.out.println(decision);
+        return decision;
     }
 
-//    double getDouble() {
-//        System.out.println("Gimme a number.\n");
-//        double answer = scanner.nextDouble();
-//        return answer;
-//    }
-
-    double getDouble(double min, double max) throws Exception {
-        System.out.format("Gimme a number between %.1f and %.1f\n",min,max );
-        double answer = Double.valueOf(getString());
+    public int getInt() {
+        int num = 0;
+        System.out.println("Enter a number: ");
         try {
-            if (answer < min || answer > max) {
-                throw new Exception("Read the curriculum");
-            }
-            System.out.println(answer);
+            num = Integer.parseInt(String.valueOf(getString()));
         } catch (Exception e) {
-            throw new Exception("read the curriculum");
+            System.out.println("Invalid input.");
+            getInt();
         }
-        return answer;
+        return num;
     }
 
-    String getString(){
-        String answer = scanner.nextLine();
-        return answer;
+
+    public int getInt(int min, int max) {
+        System.out.println("Enter a number between " + min + " and " + max);
+        int userInput = scanner.nextInt();
+        if (userInput < min || userInput > max) {
+            return getInt(min, max);
+        } else {
+            return userInput;
+        }
     }
 
+    public double getDouble(){
+        double num = 0;
+        System.out.println("Enter a decimal number: ");
+        try {
+            num = Double.parseDouble(getString());
+        }catch (Exception e) {
+            System.out.println("Invalid input.");
+            getDouble();
+        }
+        return num;
+    }
+
+    public double getDouble(double min, double max){
+        System.out.println("Enter a number between " + min + " and " + max);
+        double userInput = scanner.nextDouble();
+        if (userInput < min || userInput > max) {
+            return getDouble(min, max);
+        }
+        System.out.println("Congrats! You hit within the range. Your number is: " + userInput);
+        return userInput;
+
+    }
+
+    public int getBinary() {
+        int result = 0;
+        int base = 2;
+        System.out.println("Enter a binary number: ");
+        try{
+            String userInput = scanner.next();
+            result = Integer.valueOf(userInput, base);
+        }catch (Exception e) {
+            System.out.println("Invalid input.");
+            getBinary();
+        }
+        return result;
+    }
+
+    public int getHex() {
+        int result =0;
+        int base = 16;
+        System.out.println("Enter a hexidecimal number: ");
+        try{
+            String userInput = scanner.next();
+            result = Integer.valueOf(userInput, base);
+        }catch (Exception e) {
+            System.out.println("Invalid input");
+            result = getHex();
+        }
+        return result;
+    }
 }

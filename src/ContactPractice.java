@@ -16,6 +16,11 @@ public class ContactPractice {
 //    if (! Files.exists(dataFile)) {
 //            Files.createFile(dataFile);
 //    }
+
+    public static void showContacts() {
+    }
+
+
     public static void showMenu(){
         System.out.println( "1. View contacts.\n" +
                 "2. Add a new contact.\n" +

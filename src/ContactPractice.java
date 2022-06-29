@@ -1,13 +1,13 @@
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ContactPractice {
-    String directory = "data";
-    String filename = "contact.txt";
-
-    Path dataDirectory = Paths.get(directory);
-    Path dataFile = Paths.get(directory, filename);
+    static String directory = "data";
+    static String filename = "contact.txt";
+    static Path dataDirectory = Paths.get(directory);
+    static Path dataFile = Paths.get(directory, filename);
 
 //    if (Files.notExists(dataDirectory)) {
 //        Files.createDirectories(dataDirectory);
@@ -35,6 +35,27 @@ public class ContactPractice {
 
 
     public static void main(String[] args) {
+// write to files, look into these.  May be an easier way for us to understand file IO?
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("contact.txt"));
+            writer.write("Writing to a file.");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+// Read from files
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("contact.txt"));
+            String line;
+            while ((line = reader.readLine()) != null){
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         showMenu();
 
     }

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -9,41 +8,11 @@ public class ContactPractice {
     static Path dataDirectory = Paths.get(directory);
     static Path dataFile = Paths.get(directory, filename);
 
-//    if (Files.notExists(dataDirectory)) {
-//        Files.createDirectories(dataDirectory);
-//    }
-//
-//    if (! Files.exists(dataFile)) {
-//            Files.createFile(dataFile);
-//    }
+    String name;
+    String number;
+
 
     public static void showContacts() {
-    }
-
-
-    public static void showMenu(){
-        System.out.println( "1. View contacts.\n" +
-                "2. Add a new contact.\n" +
-                "3. Search a contact by name.\n" +
-                "4. Delete an existing contact.\n" +
-                "5. Exit.\n" +
-                "Enter an option (1, 2, 3, 4 or 5):");
-    }
-
-
-
-
-
-    public static void main(String[] args) {
-// write to files, look into these.  May be an easier way for us to understand file IO?
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("contact.txt"));
-            writer.write("Writing to a file.");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-// Read from files
         try {
             BufferedReader reader = new BufferedReader(new FileReader("contact.txt"));
             String line;
@@ -54,9 +23,43 @@ public class ContactPractice {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void showMenu(){
+        System.out.println( "1. View contacts.\n" +
+                "2. Add a new contact.\n" +
+                "3. Search a contact by name.\n" +
+                "4. Delete an existing contact.\n" +
+                "5. Exit.\n" +
+                "Enter an option (1, 2, 3, 4 or 5):");
+    }
+
+    public static void writeToFile() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("contact.txt"));
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
-        showMenu();
+
+
+
+
+    public static void main(String[] args) {
+// write to files, look into these.  May be an easier way for us to understand file IO?
+
+
+        showContacts();
+// Read from files
+
+
+
+//        showMenu();
 
     }
 }
